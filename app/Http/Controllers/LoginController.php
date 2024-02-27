@@ -21,6 +21,6 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
-        return redirect()->route('user');
+        return redirect()->intended('/user');
     }
 }
