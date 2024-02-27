@@ -17,6 +17,6 @@ class RegistrationController extends Controller
         ]);
 
         User::query()->create($data);
-        return redirect()->route('registration');
+        return redirect()->route('user');
     }
 }
