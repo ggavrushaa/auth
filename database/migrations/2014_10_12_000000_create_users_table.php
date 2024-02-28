@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id()->from(1001);
             $table->timestamps();
+            $table->timestamp('online_at')->nullable();
 
             $table->string('first_name')->comment('Имя');
             $table->string('middle_name')->nullable()->comment('Отчество');
