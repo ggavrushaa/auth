@@ -42,7 +42,7 @@
     <x-slot:crosslink>
         Уже зарегистрированы?
 
-        <x-link to="{{ route('login') }}">
+        <x-link href="{{ route('login') }}">
             Войти
         </x-link>
     </x-slot:crosslink>

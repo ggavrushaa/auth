@@ -14,12 +14,12 @@
             {{$user->getFullName()}}
         </x-slot:value>
         <x-slot:action>
-            <x-link>Изменить</x-link>
+            <x-link href="{{route('user.settings.profile.edit')}}">
+                Изменить
+            </x-link>
         </x-slot:action>
     </x-list.item>
-</x-list>
 
-<x-list>
     <x-list.item>
         <x-slot:name>
             Ваш пол
@@ -28,12 +28,12 @@
             {{$user->gender?->name() ?: 'Не указано'}}
         </x-slot:value>
         <x-slot:action>
-            <x-link>Изменить</x-link>
+            <x-link href="{{route('user.settings.profile.edit')}}">
+                Изменить
+            </x-link>
         </x-slot:action>
     </x-list.item>
-</x-list>
 
-<x-list>
     <x-list.item>
         <x-slot:name>
             Ваш email
@@ -45,9 +45,7 @@
             <x-link>Изменить</x-link>
         </x-slot:action>
     </x-list.item>
-</x-list>
 
-<x-list>
     <x-list.item>
         <x-slot:name>
             Ваш пароль
@@ -59,4 +57,5 @@
             <x-link>Изменить</x-link>
         </x-slot:action>
     </x-list.item>
+
 </x-list>

@@ -14,4 +14,12 @@ enum GenderEnum : string
             self::female => 'Женщина',
         };
     }
+
+    public static function select(): array
+    {
+        return [
+            self::male->value => 'Мужчина',
+            self::female->value => 'Женщина',
+        ];
+    }
 }
