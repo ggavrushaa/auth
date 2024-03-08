@@ -29,6 +29,8 @@ class ProfileController extends Controller
             'middle_name',
             'last_name',
             'gender',
+            'email',
+            'password',
         ]);
 
         $user->update($data);

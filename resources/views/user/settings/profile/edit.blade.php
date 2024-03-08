@@ -66,25 +66,28 @@
     <x-list>
         <x-list.item>
             <x-slot:name>
-                Ваш email
+                Почта
             </x-slot:name>
             <x-slot:value>
-                {{$user->email}}
+                <div class="grid grid-cols-2">
+                    <div class="col-span-2 md:col-span-1">
+                        <x-form.text type="email" name="email" :value="$user->email" />
+                    </div>
+                </div>
             </x-slot:value>
-            <x-slot:action>
-                <x-link>Изменить</x-link>
-            </x-slot:action>
         </x-list.item>
+
         <x-list.item>
             <x-slot:name>
                 Ваш пароль
             </x-slot:name>
             <x-slot:value>
-                {{$user->securePassword()}}
+                <div class="grid grid-cols-2">
+                    <div class="col-span-2 md:col-span-1">
+                        <x-form.text type="password" name="password" :value="$user->password" />
+                    </div>
+                </div>
             </x-slot:value>
-            <x-slot:action>
-                <x-link>Изменить</x-link>
-            </x-slot:action>
         </x-list.item>
     </x-list>
 
