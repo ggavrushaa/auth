@@ -25,12 +25,14 @@ class User extends Authenticatable
         'email',
         'password',
         'gender',
+        'password_at',
     ];
 
     protected $casts = [
         'gender' => GenderEnum::class,
         'online_at' => 'datetime',
         'password' => 'hashed',
+        'password_at' => 'datetime',
     ];
 
     /**
@@ -55,6 +57,14 @@ class User extends Authenticatable
     public function securePassword()
     {
         return "********";
+    }
+
+    public function updatePassword(string $password): bool
+    {
+        return $this->update([
+            'password' => $password,
+            'password_at' => now(),
+        ]);
     }
     
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\Settings\ProfileController;
+use App\Http\Controllers\User\Settings\PasswordController;
 
 Route::redirect('/', '/registration', 301);
 
@@ -26,6 +27,8 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::get('/user/settings', [SettingsController::class, 'index'])->name('user.settings');
     Route::get('/user/settings/profile', [ProfileController::class, 'edit'])->name('user.settings.profile.edit');
     Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update');
+    Route::get('/user/settings/password', [PasswordController::class, 'edit'])->name('user.settings.password.edit');
+    Route::post('/user/settings/password', [PasswordController::class, 'update'])->name('user.settings.password.update');
 });
 
 

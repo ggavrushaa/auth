@@ -10,7 +10,7 @@
 
             <x-form.item>
                 <x-form.label>Ваш Email</x-form.label>
-                <x-form.text name="email" placeholder="mail@axample.com" />
+                <x-form.text name="email" placeholder="mail@axample.com" autofocus/>
             </x-form.item>
             
             <x-form.item>

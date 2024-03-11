@@ -15,7 +15,7 @@
             <x-slot:value>
                 <div class="grid grid-cols-2">
                     <div class="col-span-2 md:col-span-1">
-                        <x-form.text type="text" name="first_name" :value="$user->first_name" />
+                        <x-form.text type="text" name="first_name" :value="$user->first_name" autofocus/>
                     </div>
                 </div>
             </x-slot:value>
@@ -72,19 +72,6 @@
                 <div class="grid grid-cols-2">
                     <div class="col-span-2 md:col-span-1">
                         <x-form.text type="email" name="email" :value="$user->email" />
-                    </div>
-                </div>
-            </x-slot:value>
-        </x-list.item>
-
-        <x-list.item>
-            <x-slot:name>
-                Ваш пароль
-            </x-slot:name>
-            <x-slot:value>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-2 md:col-span-1">
-                        <x-form.text type="password" name="password" :value="$user->password" />
                     </div>
                 </div>
             </x-slot:value>

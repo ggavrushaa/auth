@@ -22,7 +22,6 @@ class UpdateRequest extends FormRequest
             'middle_name' => ['nullable', 'string', 'max:50'],
             'gender' => ['required', 'string', Rule::enum(GenderEnum::class)],
             'email' => ['nullable', 'string', 'email:filter', 'max:100' ],
-            'password' => ['required', 'string', Password::defaults()],
         ];
     }
 }
