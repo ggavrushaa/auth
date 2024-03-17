@@ -19,9 +19,18 @@
             </x-form.item>
 
             <x-form.item>
-                <x-form.check name="remember">
-                    Запомнить меня
-                </x-form.check>
+                <div class="flex justify-between">
+                    <div>
+                        <x-form.check name="remember">
+                            Запомнить меня
+                        </x-form.check>
+                    </div>
+                    <div>
+                        <x-link href="{{route('password')}}" class="text-sm">
+                            Забыли пароль?
+                        </x-link>
+                    </div>
+                </div>
             </x-form.item>
 
         <x-button type="submit">
