@@ -34,4 +34,13 @@ class Password extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function updateStatus(PasswordStatusEnum $status): bool
+    {
+        if($this->status->is($status)) {
+            return false;
+        }
+
+        return $this->update(['status' => $status]);
+    }
 }
