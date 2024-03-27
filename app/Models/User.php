@@ -19,13 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'online_at',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'email',
+        'first_name', 'middle_name', 'last_name',
+        'email', 'email_confirmed_at',
         'password',
-        'gender',
-        'password_at',
+        'gender', 'password_at',
     ];
 
     protected $casts = [
@@ -65,6 +62,11 @@ class User extends Authenticatable
             'password' => $password,
             'password_at' => now(),
         ]);
+    }
+
+    public function isEmailConfirmed()
+    {
+        return (bool) $this->email_confirmed_at;
     }
     
 }

@@ -1,16 +1,18 @@
 <?php
 
 
+use App\Http\Middleware\EmailConfirmedMiddleware;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\User\SettingsController;
+use App\Notifications\Password\ConfirmNotification;
 use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
-use App\Models\User;
-use App\Notifications\Password\ConfirmNotification;
 
 Route::redirect('/', '/registration', 301);
 
@@ -29,13 +31,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/password/{password:uuid}', [PasswordController::class, 'update'])->name('password.update')->whereUuid('password');
 });
 
+Route::get('email/confirmation', [EmailController::class, 'confirmation'])->name('email.confirmation');
+
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth', 'online'])->group(function () {
     Route::redirect('/user', '/user/settings')->name('user');
     Route::get('/user/settings', [SettingsController::class, 'index'])->name('user.settings');
-    Route::get('/user/settings/profile', [ProfileController::class, 'edit'])->name('user.settings.profile.edit');
-    Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update');
+    Route::get('/user/settings/profile', [ProfileController::class, 'edit'])->name('user.settings.profile.edit')->middleware(EmailConfirmedMiddleware::class);
+    Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update')->middleware(EmailConfirmedMiddleware::class);
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
 });
