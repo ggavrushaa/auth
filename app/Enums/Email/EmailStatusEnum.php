@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\Email;
 
-enum PasswordStatusEnum: string
+enum EmailStatusEnum: string
 {
     case pending = 'pending';
     case completed = 'completed';

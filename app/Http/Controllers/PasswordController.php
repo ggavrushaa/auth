@@ -9,7 +9,7 @@ use App\Enums\PasswordStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Password\StoreRequest;
 use App\Http\Requests\Password\UpdateRequest;
-use App\Notifications\Password\ConfirmNotification;
+use App\Notifications\Password\ConfirmPasswordNotification;
 
 class PasswordController extends Controller
 {
@@ -26,7 +26,7 @@ class PasswordController extends Controller
         $password = Password::query()
             ->create(compact('ip', 'email') + ['user_id' => $user?->id]);
 
-        $user?->notify(new ConfirmNotification($password));
+        $user?->notify(new ConfirmPasswordNotification($password));
 
         return to_route('password.confirm');
     }

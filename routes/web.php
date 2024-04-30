@@ -10,9 +10,11 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\User\SettingsController;
-use App\Notifications\Password\ConfirmNotification;
+use App\Notifications\Password\ConfirmPasswordNotification;
 use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
+use App\Models\Email;
+use App\Notifications\Email\ConfirmEmailNotification;
 
 Route::redirect('/', '/registration', 301);
 
@@ -32,6 +34,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('email/confirmation', [EmailController::class, 'confirmation'])->name('email.confirmation');
+Route::post('email/confirmation/send', [EmailController::class, 'send'])->name('email.confirmation.send');
+Route::get('email/{email:uuid}', [EmailController::class, 'link'])->name('email.confirmation.link')->whereUuid('email');
 
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout')->middleware('auth');
 
@@ -43,4 +47,5 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
 });
+
 

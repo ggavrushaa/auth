@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\User\UserCreatedEvent;
 use App\Http\Requests\Registration\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ class RegistrationController extends Controller
         ]);
 
         $user = User::query()->create($data);
+
+        event(new UserCreatedEvent($user));
+
         Auth::login($user);
 
         return redirect()->intended('/user');

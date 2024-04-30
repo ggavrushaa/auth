@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ConfirmNotification extends Notification implements ShouldQueue
+class ConfirmPasswordNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -23,9 +23,6 @@ class ConfirmNotification extends Notification implements ShouldQueue
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail(User $notifiable): MailMessage
     {
         $url = app_url("password/{$this->password->uuid}");
@@ -34,7 +31,6 @@ class ConfirmNotification extends Notification implements ShouldQueue
                     ->subject('Изменение пароля')
                     ->greeting('Здравствуйте!')
                     ->line('Для изменения пароля нажмите на кнопку ниже:')
-                    ->action('Изменить пароль', $url)
-                    ->line('Thank you for using our application!');
+                    ->action('Изменить пароль', $url);
     }
 }

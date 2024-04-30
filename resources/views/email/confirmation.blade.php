@@ -10,9 +10,14 @@
     </x-card.body>
 </x-card>
 
-    {{-- <x-slot:crosslink>
-        <x-link href="{{route('login')}}">
-            Войти в аккаунт
+@unless (session('email-confirmation-sent'))
+    <x-slot:crosslink>
+        <x-link href="#" x-data x-on:click.prevent="$refs.form.submit()">
+            Отправить еще раз
+
+            <x-form class="d-none" x-ref="form" action="{{ route('email.confirmation.send') }}" method="post" />
         </x-link>
-    </x-slot:crosslink> --}}
+    </x-slot:crosslink>
+@endunless
+
 </x-layouts.auth>
