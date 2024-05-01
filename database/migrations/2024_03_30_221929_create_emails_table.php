@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('value');
             $table->foreignId('user_id')->constrained();
             $table->string('status')->default(EmailStatusEnum::pending->value);
+            $table->string('code');
+
         });
     }
 

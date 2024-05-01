@@ -233,5 +233,6 @@ return [
         'username'                 => 'никнейм',
         'year'                     => 'год',
         'agreement'                => 'согласие',
+        'code'                     => 'код',
     ],
 ];

@@ -10,30 +10,49 @@ use App\Notifications\Email\ConfirmEmailNotification;
 
 class EmailController extends Controller
 {
-    public function confirmation(Request $request)
+    public function index(Request $request)
     {
          /** @var User  */
          $user = $request->user();
 
-        if($user && $user->isEmailConfirmed()) {
-            return redirect()->intended('/user');
-        }
+         abort_if($user->isEmailConfirmed(), 404);
+
+         $email = Email::query()
+            ->where('user_id', $user->id)
+            ->where('status', EmailStatusEnum::pending)
+            ->firstOrFail();
          
-        return view('email.confirmation');
+        return view('email.confirmation', compact('email'));
     }
 
     public function link(Email $email)
     {
-       abort_if($email->user()->isEmailConfirmed(), 404);
+       abort_if($email->user->isEmailConfirmed(), 404);
        abort_unless($email->status->is(EmailStatusEnum::pending), 404);
 
-       $email->user()->confirmEmail();
+       $email->user->confirmEmail();
+       $email->updateStatus(EmailStatusEnum::completed);
+
+       return redirect()->intended('/user');
+    }
+    public function code(Email $email, Request $request)
+    {
+       abort_if($email->user->isEmailConfirmed(), 404);
+       abort_unless($email->status->is(EmailStatusEnum::pending), 404);
+
+       $validated = $request->validate(['code' => 'required|string',]);
+
+       if($email->code !== $validated['code']) {
+            return back()->withErrors(['code' => 'Не верный код']);
+       }
+
+       $email->user->confirmEmail();
        $email->updateStatus(EmailStatusEnum::completed);
 
        return redirect()->intended('/user');
     }
 
-    public function send(Request $request)
+    public function send(Request $request, Email $email)
     {
 
         if (session('email-confirmation-sent')) {
@@ -43,17 +62,12 @@ class EmailController extends Controller
         /** @var User  */
         $user = $request->user();
 
-        abort_unless($user, 404);
-        abort_if($user->isEmailConfirmed(), 404);
-
-        $email = Email::query()
-            ->where('user_id', $user->id)
-            ->where('status', EmailStatusEnum::pending)
-            ->firstOrFail();
+        abort_if($email->user->isEmailConfirmed(), 404);
+        abort_unless($email->status->is(EmailStatusEnum::pending), 404);
 
         $notification = new ConfirmEmailNotification($email);
 
-        $user->notify($notification);
+        $email->user->notify($notification);
 
         session(['email-confirmation-sent' => now()]);
 

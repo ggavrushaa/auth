@@ -25,12 +25,13 @@ class ConfirmEmailNotification extends Notification implements ShouldQueue
 
     public function toMail(User $notifiable): MailMessage
     {
-        $url = app_url("email/{$this->email->uuid}");
+        $url = app_url("email/{$this->email->uuid}/link");
 
         return (new MailMessage)
                     ->subject('Подтверждение почты')
                     ->greeting('Здравствуйте!')
-                    ->line('Для подверждения почты нажмите на кнопку ниже:')
+                    ->line("Введите код подтверждения: {$this->email->code}")
+                    ->line('Или нажмите на кнопку ниже:')
                     ->action('Подтверждение почты', $url);
     }
 }

@@ -33,9 +33,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/password/{password:uuid}', [PasswordController::class, 'update'])->name('password.update')->whereUuid('password');
 });
 
-Route::get('email/confirmation', [EmailController::class, 'confirmation'])->name('email.confirmation');
-Route::post('email/confirmation/send', [EmailController::class, 'send'])->name('email.confirmation.send');
-Route::get('email/{email:uuid}', [EmailController::class, 'link'])->name('email.confirmation.link')->whereUuid('email');
+Route::middleware('auth')->group(function () {
+    Route::get('email/confirmation', [EmailController::class, 'index'])->name('email.confirmation');
+    Route::get('email/{email:uuid}/link', [EmailController::class, 'link'])->name('email.confirmation.link')->whereUuid('email')->withoutMiddleware('auth');
+    Route::post('email/{email:uuid}/code', [EmailController::class, 'code'])->name('email.confirmation.code')->whereUuid('email');
+    Route::post('email/{email:uuid}/send', [EmailController::class, 'send'])->name('email.confirmation.send');
+});
 
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout')->middleware('auth');
 

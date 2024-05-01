@@ -20,17 +20,26 @@ class Email extends Model
         'value',
         'user_id',
         'status',
+        'code',
     ];
 
     protected $casts = [
         'status' => EmailStatusEnum::class,
+        'code' => 'encrypted',
     ];
 
+    public static function booted(): void
+    {
+        self::creating(function (Email $email) {
+            $email->code = code();
+        });
+    }
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
+    
     public function updateStatus(EmailStatusEnum $status): bool
     {
         if($this->status->is($status)) {
