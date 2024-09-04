@@ -9,7 +9,8 @@
         [x-cloak] { display: none !important; }
     </style>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <script src="//unpkg.com/alpinejs" defer></script> 
+    @livewireStyles
+    @livewireScripts
 </head>
 <body>
     {{$slot}}

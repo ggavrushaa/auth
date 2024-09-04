@@ -45,6 +45,7 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::get('/user/settings', [SettingsController::class, 'index'])->name('user.settings');
     Route::get('/user/settings/profile', [ProfileController::class, 'edit'])->name('user.settings.profile.edit')->middleware(EmailConfirmedMiddleware::class);
     Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update')->middleware(EmailConfirmedMiddleware::class);
+    Route::view('/user/settings/email', 'user.settings.email.edit')->name('user.settings.email.edit');
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
 });

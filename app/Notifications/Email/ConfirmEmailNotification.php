@@ -13,9 +13,17 @@ class ConfirmEmailNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    private bool $withLink = true;
+
     public function __construct(private Email $email)
     {
         //
+    }
+
+    public function withoutLink()
+    {
+        $this->withLink = false;
+        return $this;
     }
 
     public function via(object $notifiable): array
@@ -25,13 +33,19 @@ class ConfirmEmailNotification extends Notification implements ShouldQueue
 
     public function toMail(User $notifiable): MailMessage
     {
-        $url = app_url("email/{$this->email->uuid}/confirm?code={$this->email->code}");
+        
+        $message = (new MailMessage)
+            ->subject('Подтверждение почты')
+            ->greeting('Здравствуйте!')
+            ->line("Введите код подтверждения: {$this->email->code}");
+        
+        if ($this->withLink) {
+            $url = app_url("email/{$this->email->uuid}/confirm?code={$this->email->code}");
 
-        return (new MailMessage)
-                    ->subject('Подтверждение почты')
-                    ->greeting('Здравствуйте!')
-                    ->line("Введите код подтверждения: {$this->email->code}")
-                    ->line('Или нажмите на кнопку ниже:')
-                    ->action('Подтверждение почты', $url);
+            $message->line('Или нажмите на кнопку ниже:')
+                ->action('Подтверждение почты', $url);
+        }
+
+        return $message;
     }
 }
