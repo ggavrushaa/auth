@@ -11,7 +11,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.5"
+        "livewire/livewire": "^3.5",
+        "socialiteproviders/vkontakte": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.15",

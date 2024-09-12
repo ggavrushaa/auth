@@ -14,6 +14,10 @@ class EmailConfirmedMiddleware
         /** @var User  */
         $user = $request->user();
 
+        if(is_null($user->email)) {
+            return $next($request);
+        }
+
         if($user->isEmailConfirmed()) {
             return $next($request);
         }

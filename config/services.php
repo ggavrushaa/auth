@@ -37,4 +37,10 @@ return [
         'redirect' => env('APP_URL').'/social/github/callback',
     ],
 
+    'vkontakte' => [    
+        'client_id' => env('VKONTAKTE_CLIENT_ID'),  
+        'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),  
+        'redirect' => env('APP_URL').'/social/vkontakte/callback', 
+    ],
+
 ];
