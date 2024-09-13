@@ -53,5 +53,3 @@ Route::middleware(['auth', 'online'])->group(function () {
 
 Route::get('/social/{driver}/redirect', [SocialController::class, 'redirect'])->name('social.redirect');
 Route::get('/social/{driver}/callback', [SocialController::class, 'callback'])->name('social.callback');
-
-
