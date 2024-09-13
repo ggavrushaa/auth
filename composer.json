@@ -12,6 +12,7 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
+        "socialiteproviders/telegram": "^4.1",
         "socialiteproviders/vkontakte": "^5.0"
     },
     "require-dev": {

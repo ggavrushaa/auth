@@ -17,11 +17,12 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        URL::forceScheme('https');
+        // URL::forceScheme('https');
         $this->setPasswordDefault();
 
         $this->registerSocialite();
     }
+
 
     private function setPasswordDefault(): void
     {
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Event::listen(function (SocialiteWasCalled $event) {
             $event->extendSocialite('vkontakte', \SocialiteProviders\VKontakte\Provider::class);
+            $event->extendSocialite('telegram', \SocialiteProviders\Telegram\Provider::class);
         });
     }
 
