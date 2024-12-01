@@ -11,6 +11,7 @@ class SettingsController extends Controller
 {
     public function index(HttpRequest $request)
     {
+        session(['foo' => 'bar']);
         $user = $request->user();
 
         return view('user.settings.index', compact('user'));

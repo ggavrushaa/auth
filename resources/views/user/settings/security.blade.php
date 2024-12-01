@@ -24,6 +24,19 @@
                 </x-link>
             </x-slot:action>
         </x-list.item>
+        <x-list.item>
+            <x-slot:name>
+                Двухфакторная аутентификация
+            </x-slot:name>
+            <x-slot:value>
+                Выключена
+            </x-slot:value>
+            <x-slot:action>
+                <x-link href="{{route('user.settings.google')}}">
+                    Включить
+                </x-link>
+            </x-slot:action>
+        </x-list.item>
     
     </x-list>
 </div>
