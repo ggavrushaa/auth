@@ -10,6 +10,7 @@
         'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
         'bg-indigo-600 hover:bg-indigo-500 focus-visible:outline-indigo-600 text-white' => ($color === 'indigo'),
         'bg-white hover:bg-gray-50 text-gray-900 ring-1 ring-inset ring-gray-300' => ($color === 'white'),
+        'bg-red-600 hover:bg-red-500 focus-visible:outline-red-600 text-white' => ($color === 'red'),
     ])
 @endphp
 

@@ -6,7 +6,9 @@
         </x-slot:description>
     </x-title>
     
-    @if(session('google_confirmation'))
+    @if(Auth::user()->googleConfirmationEnabled())
+     @include('user.settings.google.disable')
+    @elseif(session('google_confirmation'))
      @include('user.settings.google.confirm')
     @else
      @include('user.settings.google.enable')

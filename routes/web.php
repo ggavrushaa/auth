@@ -50,9 +50,12 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::view('/user/settings/email', 'user.settings.email.edit')->name('user.settings.email.edit');
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
+   
     Route::get('/user/settings/google', [GoogleController::class, 'index'])->name('user.settings.google');
     Route::post('/user/settings/google/enable', [GoogleController::class, 'enable'])->name('user.settings.google.enable');
+    Route::post('/user/settings/google/disable', [GoogleController::class, 'disable'])->name('user.settings.google.disable');
     Route::post('/user/settings/google/confirm', [GoogleController::class, 'confirm'])->name(name: 'user.settings.google.confirm');
+    Route::post('/user/settings/google/cancel', [GoogleController::class, 'cancel'])->name(name: 'user.settings.google.cancel');
 });
 
 Route::get('/social/{driver}/redirect', [SocialController::class, 'redirect'])->name('social.redirect');

@@ -29,11 +29,19 @@
                 Двухфакторная аутентификация
             </x-slot:name>
             <x-slot:value>
-                Выключена
+                @if(Auth::user()->googleConfirmationEnabled())
+                    Включена
+                @else
+                    Выключена
+                @endif
             </x-slot:value>
             <x-slot:action>
                 <x-link href="{{route('user.settings.google')}}">
-                    Включить
+                    @if(Auth::user()->googleConfirmationEnabled())
+                        Отключить
+                    @else
+                        Включить
+                    @endif
                 </x-link>
             </x-slot:action>
         </x-list.item>

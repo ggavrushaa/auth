@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\QrCode\QrCode;
 use Illuminate\Support\Str;
 
 function app_url(string $path = '')
@@ -18,4 +19,9 @@ function uuid(): string
 function code(): string 
 {
     return (string) rand(100_000, 999_999);
+}
+
+function qr_code(string $content): QrCode
+{
+    return new QrCode($content);
 }

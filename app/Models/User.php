@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\HasGoogleConfirmation;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasGoogleConfirmation;
     protected $fillable = [
         'online_at',
         'first_name', 'middle_name', 'last_name',
         'email', 'email_confirmed_at',
         'password',
         'gender', 'password_at',
+        'google_confirmation', 'google_confirmation_secret',
     ];
 
     protected $casts = [
@@ -24,6 +29,8 @@ class User extends Authenticatable
         'online_at' => 'datetime',
         'password' => 'hashed',
         'password_at' => 'datetime',
+        'google_confirmation' => 'boolean',
+        'google_confirmation_secret' => 'encrypted',
     ];
 
     protected $hidden = [

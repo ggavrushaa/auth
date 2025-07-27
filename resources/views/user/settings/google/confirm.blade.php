@@ -6,7 +6,7 @@
             </x-slot:name>
             <x-slot:value>
                 <div class="inline-flex items-center gap-3">
-                  QR-код
+                  {!! qr_code(Auth::user()->getQrCodeUrl())->size(200)->svg() !!}
                 </div>
             </x-slot:value>
         </x-list.item>
@@ -25,7 +25,7 @@
     </x-list>
     <x-form.footer>
         <x-slot:buttons>
-            <x-button href="{{ route('user.settings') }}" color="white">
+            <x-button type="submit" form="cancel-form" color="white">
                 Отменить
             </x-button>
             <x-button type="submit">
@@ -34,3 +34,5 @@
         </x-slot:buttons>
     </x-form.footer>
 </x-form>
+
+<x-form action="{{ route('user.settings.google.cancel') }}" method="post" id="cancel-form"></x-form>
