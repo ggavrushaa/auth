@@ -27,6 +27,8 @@ Route::middleware('guest')->group(function () {
     
     Route::view('/login', 'login.index')->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::view('/login/confirmation', 'login.confirmation')->name('login.confirmation');
+    Route::post('/login/confirm', [LoginController::class, 'confirm'])->name('login.confirm');
 
     Route::view('/password', 'password.index')->name('password');
     Route::post('/password', [PasswordController::class, 'store'])->name('password.store');
