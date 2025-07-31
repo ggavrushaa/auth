@@ -9,7 +9,7 @@
         <p class="mb-4">
             Введите код из приложения Google Authenticator
         </p>
-        <x-form action="{{route('login.confirm')}}" method="POST">
+        <x-form action="{{route('login.confirm', $login->uuid)}}" method="POST">
 
             <x-form.item>
                 <x-form.label>Код подтверждения</x-form.label>

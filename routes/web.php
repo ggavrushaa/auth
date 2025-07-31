@@ -27,8 +27,8 @@ Route::middleware('guest')->group(function () {
     
     Route::view('/login', 'login.index')->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-    Route::view('/login/confirmation', 'login.confirmation')->name('login.confirmation');
-    Route::post('/login/confirm', [LoginController::class, 'confirm'])->name('login.confirm');
+    Route::get('/login/{login:uuid}/confirmation', [LoginController::class, 'confirmation'])->name('login.confirmation')->whereUuid('login');
+    Route::post('/login/{login:uuid}/confirm', [LoginController::class, 'confirm'])->name('login.confirm')->whereUuid('login');
 
     Route::view('/password', 'password.index')->name('password');
     Route::post('/password', [PasswordController::class, 'store'])->name('password.store');
